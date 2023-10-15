@@ -1,0 +1,50 @@
+.Container{
+}
+
+.Contained-List{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.Contained-Input{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 10px
+}
+
+.Contained-Buttons{
+    display: flex;
+    flex-direction: column;
+}
+
+.list-input{
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 40px;
+    width: 550px;
+    margin-right: 1%;
+    font-size: 20px;
+}
+
+.Addition-Button{
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    margin-left: 1%;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.Manipulations{
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    margin-left: 1%;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+

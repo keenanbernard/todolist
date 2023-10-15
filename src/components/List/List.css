@@ -1,0 +1,26 @@
+.list{
+    margin: 15px;
+    border-radius: 15px;
+    border: solid black;
+    height: 600px;
+    width: 300px;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+}
+
+.list-title{
+    text-align: center;
+    margin: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.list-item{
+    margin: 20px 35px;
+    list-style: none;
+    font-size: 20px;
+}
+
+.highlighted{
+    color: green;
+}
