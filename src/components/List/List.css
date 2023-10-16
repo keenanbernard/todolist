@@ -1,26 +1,74 @@
-.list{
+.list {
     margin: 15px;
     border-radius: 15px;
-    border: solid black;
     height: 600px;
     width: 300px;
+    overflow-y: auto;
+    max-height: 10000px; /* Set initial maximum height */
     text-align: left;
     font-family: 'Poppins', sans-serif;
 }
 
-.list-title{
+.list-title-container{
+    border-bottom: 1px solid black;
+    margin: 10px 0;
+}
+
+.list-title {
     text-align: center;
     margin: 10px 0;
     font-size: 20px;
     font-weight: bold;
 }
 
-.list-item{
-    margin: 20px 35px;
-    list-style: none;
-    font-size: 20px;
+.list-items {
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
 }
 
-.highlighted{
-    color: green;
+.list-item-container{
+    border-radius: 10px;
+    border: 1px solid transparent;
+    margin: 5px 0;
+}
+
+.list-item-container:hover{
+    background: lightgrey;
+    transition: .5s;
+}
+
+.list-item {
+    margin: 5px 0 5px 15px;
+    list-style: none;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between; /* Align button on the left and text on the right */
+    align-items: center; /* Vertically center content */
+}
+
+.list-item:hover{
+    cursor: grab;
+}
+
+.list-options-container{
+    display: flex; /* Ensure the buttons stay on the same side */
+    align-items: center; /* Vertically center buttons */
+}
+
+.list-options {
+    font-size: 25px;
+    height: 15px;
+    margin-top: -22%;
+    margin-right: 15px; /* Add right margin for spacing */
+    background: none;
+    border: none;
+}
+
+.list-options:hover{
+    cursor: pointer;
+}
+
+.highlighted {
+    color: red;
 }

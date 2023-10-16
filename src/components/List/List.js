@@ -5,7 +5,7 @@ const List = (props) =>{
 
   useEffect(() => {
     setItems(props.list)
-  }, [props]);
+  }, [props.list]);
 
 
   const selection = (val) =>{
@@ -14,13 +14,24 @@ const List = (props) =>{
 
   return(
     <div className='list'>
-      <div className='list-title'>{props.name}</div>
-      {items?.map((val, index) => (
-        <li
-          key={index + 1}
-          className={`list-item ${val === props.hightlighted ? `highlighted` : ``}`}
-          onClick={() => selection(val, index + 1)}>{val}</li>
-      ))}
+      <div className='list-title-container'>
+        <div className='list-title'>{props.name} {props.total}</div>
+      </div>
+      <div className='list-items'>
+        {items?.map((val) => (
+          <div className='list-item-container'>
+            <li
+              key={val.id}
+              className={`list-item ${val.id === props.hightlighted ? `highlighted` : ``}`}
+              onClick={() => selection(val)}>{val.name}
+              <div className='list-options-container'>
+                <button hidden={val.id !== props.hightlighted} className='list-options'>&#x2710;</button>
+                <button hidden={val.id !== props.hightlighted} className='list-options' onClick={() => props.remove(props.name)}>&#x2715;</button>
+              </div>
+            </li>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

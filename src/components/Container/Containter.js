@@ -5,67 +5,88 @@ import './Container.css'
 
 const Container = () => {
   const [value, setValue] = useState('')
-  const [leftList, setLeftList] = useState([])
-  const [rightList, setRightList] = useState([])
+  const [count, setCount] = useState(1);
   const [task, setTask] = useState('')
+  const [todoList, setTodoList] = useState([])
+  const [completedList, setCompletedList] = useState([])
 
   const resetStates = () => {
     setValue('')
     setTask('')
   }
 
-  const updateList = (value) => {
-    setLeftList(prevState => {
-      return [...prevState, value]
-    })
-    resetStates()
-  }
-
   const getTask = (task) => {
     setTask(task)
   }
 
-  const updateLeft = () => {
-    if (leftList.includes(task)){
-      resetStates()
-      return
-    }
+  const updateList = (value) => {
+    setCount(count + 1)
+    const task = {id: count, name: value === '' ? 'Untitled' : value}
 
-    setRightList(current =>
+    setTodoList(prevState => {
+      return [...prevState, task]
+    })
+    resetStates()
+  }
+
+  const updateLists = (list) => {
+    if(list === 'To do'){
+      if (todoList.includes(task) || task === ''){
+        resetStates()
+        return
+      }
+
+      setCompletedList(current =>
         current.filter(value => {
           return value !== task;
         }),
       );
 
-      setLeftList(prevState => {
+      setTodoList(prevState => {
         return [...prevState, task]
       })
-
-    resetStates()
-  };
-
-  const updateRight = () => {
-    if (rightList.includes(task)){
-      resetStates()
-      return
     }
 
-    setLeftList(current =>
-      current.filter(value => {
-        return value !== task;
-      }),
-    );
+    if(list === 'Completed'){
+      if (completedList.includes(task) || task === ''){
+        resetStates()
+        return
+      }
 
-    setRightList(prevState => {
-      return [...prevState, task]
-    })
+      setTodoList(current =>
+        current.filter(value => {
+          return value !== task;
+        }),
+      );
 
+      setCompletedList(prevState => {
+        return [...prevState, task]
+      })
+    }
     resetStates()
   };
+
+  const deleteTask = (list) => {
+    if(list === 'To do'){
+      setTodoList(current =>
+        current.filter(value => {
+          return value !== task;
+        }),
+      );
+    }
+
+    if(list === 'Completed'){
+      setCompletedList(current =>
+        current.filter(value => {
+          return value !== task;
+        }),
+      );
+    }
+  }
 
 
   return (
-    <div className="Container">
+    <div data-testid='Container' className="Container">
       <div className='Contained-Input'>
         <input className='list-input'
          value={value}
@@ -74,12 +95,16 @@ const Container = () => {
         <button className='Addition-Button' onClick={() => updateList(value)}>Add</button>
       </div>
       <div className='Contained-List'>
-        <List name={'To do'} list={leftList} gettask={getTask} hightlighted={task}/>
+        <List name={'To do'} list={todoList} gettask={getTask}
+              hightlighted={task.id} total={todoList.length} remove={deleteTask}
+        />
         <div className='Contained-Buttons'>
-          <button className='Manipulations' onClick={updateLeft}>&#60;</button>
-          <button className='Manipulations' onClick={updateRight}>&#62;</button>
+          <button className='Manipulations' onClick={() => updateLists('To do')}>&#60;</button>
+          <button className='Manipulations' onClick={() => updateLists('Completed')}>&#62;</button>
         </div>
-        <List name={'Completed'} list={rightList} gettask={getTask} hightlighted={task}/>
+        <List name={'Completed'} list={completedList} gettask={getTask}
+              hightlighted={task.id} total={completedList.length} remove={deleteTask}
+        />
       </div>
     </div>
   );
