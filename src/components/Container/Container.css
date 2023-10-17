@@ -57,6 +57,6 @@
 .Manipulations:hover, .Addition-Button:hover{
     cursor: pointer;
     background: purple;
-    transition: .5s;
+    transition: 0.2s;
 }
 

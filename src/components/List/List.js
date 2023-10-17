@@ -2,7 +2,15 @@ import React, {useEffect, useState} from "react";
 import './List.css'
 import ListModal from "./Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPenToSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {
+  faA,
+  faAngleDown,
+  faAngleUp,
+  faArrowsRotate,
+  faCalendarDays,
+  faPenToSquare,
+  faTrash
+} from "@fortawesome/free-solid-svg-icons";
 import {Dropdown} from "react-bootstrap";
 const List = (props) =>{
   const [items, setItems] = useState([])
@@ -30,8 +38,8 @@ const List = (props) =>{
     .sort((a, b) => {
     if (sort === 'name') {
       const sortOrder = sorting === 'ascending' ? 1 : -1;
-      if (a.name < b.name) return -1 * sortOrder;
-      if (a.name > b.name) return 1 * sortOrder;
+      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1 * sortOrder;
+      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1 * sortOrder;
     } else if (sort === 'date' || sort === 'reset') {
       const sortOrder = sorting === 'ascending' ? 1 : -1;
       const dateA = new Date(a.created);
@@ -46,18 +54,18 @@ const List = (props) =>{
       <div className='list-title-container'>
         <div className='list-title'>{props.name} {props.total}</div>
         <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+          <Dropdown.Toggle className='list-sorting' variant="secondary" id="dropdown-basic">
             Sort
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item onClick={() => sortBy('name')}>Name</Dropdown.Item>
-            <Dropdown.Item onClick={() => sortBy('date')}>Date Created</Dropdown.Item>
+            <Dropdown.Item onClick={() => sortBy('name')}><FontAwesomeIcon icon={faA} /> Name</Dropdown.Item>
+            <Dropdown.Item onClick={() => sortBy('date')}><FontAwesomeIcon icon={faCalendarDays} /> Date Created</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item onClick={() => setSorting('ascending')}>Ascending</Dropdown.Item>
-            <Dropdown.Item onClick={() => setSorting('descending')}>Descending</Dropdown.Item>
+            <Dropdown.Item onClick={() => setSorting('ascending')}><FontAwesomeIcon icon={faAngleUp} /> Ascending</Dropdown.Item>
+            <Dropdown.Item onClick={() => setSorting('descending')}><FontAwesomeIcon icon={faAngleDown} /> Descending</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item onClick={() => sortBy('reset')}>Reset</Dropdown.Item>
+            <Dropdown.Item onClick={() => sortBy('reset')}><FontAwesomeIcon icon={faArrowsRotate} /> Reset</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>

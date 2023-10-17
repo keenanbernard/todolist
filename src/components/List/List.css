@@ -25,6 +25,14 @@
     font-weight: bold;
 }
 
+.list-sorting{
+    background: black !important;
+}
+
+.list-sorting:hover{
+    background: purple !important;
+}
+
 .list-items {
     display: flex;
     flex-direction: column;
@@ -39,7 +47,7 @@
 
 .list-item-container:hover{
     background: lightgray;
-    transition: .5s;
+    transition: .2s;
 }
 
 .list-item {

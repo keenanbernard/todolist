@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import List from "../List/List";
 import './Container.css'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 
 
 const Container = () => {
@@ -101,7 +103,7 @@ const Container = () => {
          value={value}
          onChange={e => setValue(e.target.value)}
         />
-        <button className='Addition-Button' onClick={() => updateList(value)}>Add</button>
+        <button className='Addition-Button' onClick={() => updateList(value)}>Add <FontAwesomeIcon icon={faPlus} /></button>
       </div>
       <div className='Contained-List'>
         <List name={'To do'} list={todoList} gettask={getTask}
