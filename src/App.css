@@ -2,6 +2,8 @@
 
 .App {
   text-align: center;
+  font-family: 'Poppins', sans-serif;
+  --MainColor: rgba(43,48,54,255);
 }
 
 .App-logo {

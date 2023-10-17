@@ -36,9 +36,8 @@
     border-radius: 10px;
     margin-left: 1%;
     font-size: 20px;
-    font-family: 'Poppins', sans-serif;
     color: white;
-    background: black;
+    background: var(--MainColor);
     border: none;
 }
 
@@ -48,15 +47,77 @@
     border-radius: 10px;
     margin: 2% 0;
     font-size: 20px;
-    font-family: 'Poppins', sans-serif;
     color: white;
-    background: black;
+    background: var(--MainColor);
     border: none;
 }
 
 .Manipulations:hover, .Addition-Button:hover{
     cursor: pointer;
     background: purple;
-    transition: .5s;
+    transition: 0.2s;
 }
 
+@media only screen and (max-width: 1400px) {
+    .Addition-Button{
+        font-size: 19px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .list-input {
+        width: 200px;
+        height: 45px;
+    }
+
+    .Addition-Button{
+        font-size: 15px;
+        width: 90px;
+    }
+
+    .Contained-List {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 630px) {
+    .Container{
+        margin-top: 25px
+    }
+
+    .Contained-Input {
+        justify-content: center;
+        align-items: center;
+        margin: 10px 5px
+    }
+
+    .list-input {
+        height: 45px;
+        width: 250px;
+        margin-right: 1%;
+        font-size: 20px;
+    }
+
+    .Contained-Buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px
+    }
+}
+
+@media only screen and (max-width: 313px) {
+    .list-input {
+        height: 45px;
+        width: 150px;
+    }
+
+    .Addition-Button{
+        height: 45px;
+        margin-left: 2.5%;
+    }
+}

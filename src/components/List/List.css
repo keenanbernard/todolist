@@ -6,7 +6,6 @@
     overflow-y: auto;
     max-height: 10000px; /* Set initial maximum height */
     text-align: left;
-    font-family: 'Poppins', sans-serif;
 }
 
 .list-title-container{
@@ -25,6 +24,14 @@
     font-weight: bold;
 }
 
+.list-sorting{
+    background: var(--MainColor) !important;
+}
+
+.list-sorting:hover{
+    background: purple !important;
+}
+
 .list-items {
     display: flex;
     flex-direction: column;
@@ -39,7 +46,7 @@
 
 .list-item-container:hover{
     background: lightgray;
-    transition: .5s;
+    transition: .2s;
 }
 
 .list-item {
@@ -76,4 +83,24 @@
 .highlighted {
     color: purple;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 630px) {
+    .list {
+        height: 550px;
+        width: 350px;
+        max-height: 10000px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .list {
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 313px) {
+    .list {
+        width: 250px;
+    }
 }

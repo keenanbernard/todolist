@@ -1,0 +1,36 @@
+.navbar-brand:hover{
+    cursor: pointer;
+}
+
+.navbar-button{
+    color: white !important;
+    font-weight: normal;
+    background-color: transparent !important;
+    border: none !important;
+    font-size: 17px !important;
+}
+
+.navbar-button:hover{
+    text-decoration: underline;
+}
+
+.nav-bar-image{
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.canvas{
+    background: black !important;
+    color: white !important;
+}
+
+.git{
+    color: white !important;
+    font-size: 17px !important;
+}
+
+.git:hover{
+    cursor: pointer;
+    color: purple !important;
+}
