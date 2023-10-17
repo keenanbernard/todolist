@@ -1,14 +1,17 @@
 import {Modal, Button} from 'react-bootstrap'
+import './Modal.css'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faClock} from "@fortawesome/free-solid-svg-icons";
 
 const ListModal = (props) => {
-  console.log(props)
   return (
     <>
       <Modal show={props.show} onHide={props.handleclose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Task: #{props.task.id}</Modal.Title>
+          <Modal.Title className='Modal-Title'>{props.task.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{props.task.name}</Modal.Body>
+        <Modal.Body><FontAwesomeIcon icon={faClock} /> Date Created {props.task.created}</Modal.Body>
+        <Modal.Body>Status {props.status}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={props.handleclose}>
             Close

@@ -4,6 +4,7 @@ import './Container.css'
 
 
 const Container = () => {
+  const todo = {id: 0, name: '', created: '', priority: ''}
   const [value, setValue] = useState('')
   const [count, setCount] = useState(1);
   const [task, setTask] = useState('')
@@ -21,11 +22,18 @@ const Container = () => {
 
   const updateList = (value) => {
     setCount(count + 1)
-    const task = {id: count, name: value === '' ? 'Untitled' : value}
+
+    const newTask = {...todo,
+      id: count,
+      name: value === '' ? 'Untitled' : value,
+      created: new Date().toLocaleString(),
+      priority: 'Medium'
+    }
 
     setTodoList(prevState => {
-      return [...prevState, task]
+      return [...prevState, newTask]
     })
+
     resetStates()
   }
 
