@@ -66,11 +66,12 @@ const Container = () => {
     resetStates()
   };
 
-  const deleteTask = (list) => {
+  const deleteTask = (list, taskName) => {
+    console.log(list, taskName)
     if(list === 'To do'){
       setTodoList(current =>
         current.filter(value => {
-          return value !== task;
+          return value !== taskName;
         }),
       );
     }
@@ -78,7 +79,7 @@ const Container = () => {
     if(list === 'Completed'){
       setCompletedList(current =>
         current.filter(value => {
-          return value !== task;
+          return value !== taskName;
         }),
       );
     }
@@ -96,14 +97,14 @@ const Container = () => {
       </div>
       <div className='Contained-List'>
         <List name={'To do'} list={todoList} gettask={getTask}
-              hightlighted={task.id} total={todoList.length} remove={deleteTask}
+              hightlighted={task} total={todoList.length} remove={deleteTask}
         />
         <div className='Contained-Buttons'>
           <button className='Manipulations' onClick={() => updateLists('To do')}>&#60;</button>
           <button className='Manipulations' onClick={() => updateLists('Completed')}>&#62;</button>
         </div>
         <List name={'Completed'} list={completedList} gettask={getTask}
-              hightlighted={task.id} total={completedList.length} remove={deleteTask}
+              hightlighted={task} total={completedList.length} remove={deleteTask}
         />
       </div>
     </div>

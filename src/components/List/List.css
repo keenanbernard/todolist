@@ -12,10 +12,14 @@
 .list-title-container{
     border-bottom: 1px solid black;
     margin: 10px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .list-title {
-    text-align: center;
     margin: 10px 0;
     font-size: 20px;
     font-weight: bold;
@@ -34,7 +38,7 @@
 }
 
 .list-item-container:hover{
-    background: lightgrey;
+    background: lightgray;
     transition: .5s;
 }
 
@@ -59,7 +63,6 @@
 .list-options {
     font-size: 25px;
     height: 15px;
-    margin-top: -22%;
     margin-right: 15px; /* Add right margin for spacing */
     background: none;
     border: none;
@@ -67,8 +70,10 @@
 
 .list-options:hover{
     cursor: pointer;
+    color: purple;
 }
 
 .highlighted {
-    color: red;
+    color: purple;
+    font-weight: bold;
 }
