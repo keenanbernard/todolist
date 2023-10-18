@@ -26,10 +26,20 @@ const NavbarSignIn = () => {
     googleLogout();
     setProfile(null);
     setSignedIn(false)
+    localStorage.removeItem('user')
   };
 
   useEffect(() => {
-    if (user) {
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setProfile(foundUser);
+      setSignedIn(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user && !localStorage.getItem("user")) {
       const getUserInfo = async () => {
         try {
           const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
@@ -43,6 +53,7 @@ const NavbarSignIn = () => {
           if (response.ok) {
             const data = await response.json();
             setProfile(data);
+            localStorage.setItem('user', JSON.stringify(data))
             setSignedIn(true);
           } else {
             setSignedIn(false);
@@ -52,7 +63,10 @@ const NavbarSignIn = () => {
         }
       };
 
-      getUserInfo();
+      getUserInfo().then(() => {
+        const controller = new AbortController
+        controller.abort()
+      });
     }
   }, [user]);
 
