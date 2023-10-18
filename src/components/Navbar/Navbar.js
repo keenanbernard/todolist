@@ -6,7 +6,6 @@ import './Navbar.css'
 import {useState, useEffect} from "react";
 import {Button, Dropdown} from "react-bootstrap";
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
 import Canvas from "./OffCanvas";
 
 const NavbarSignIn = () => {
@@ -23,55 +22,62 @@ const NavbarSignIn = () => {
     onError: (error) => console.log('Login Failed:', error)
   });
 
-  useEffect(
-    () => {
-      if (user) {
-        axios
-          .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
-            headers: {
-              Authorization: `Bearer ${user.access_token}`,
-              Accept: 'application/json'
-            }
-          })
-          .then((res) => {
-            setProfile(res.data);
-            setSignedIn(true)
-          })
-          .catch(() => {
-            setSignedIn(false)
-          });
-      }
-    },
-    [ user ]
-  );
-
   const logOut = () => {
     googleLogout();
     setProfile(null);
     setSignedIn(false)
   };
 
+  useEffect(() => {
+    if (user) {
+      const getUserInfo = async () => {
+        try {
+          const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: 'application/json',
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setProfile(data);
+            setSignedIn(true);
+          } else {
+            setSignedIn(false);
+          }
+        } catch (error) {
+          setSignedIn(false);
+        }
+      };
+
+      getUserInfo();
+    }
+  }, [user]);
+
+
   return (
     <Navbar className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
       <Container className='navbar-container'>
-        <Navbar.Brand className='navbar-brand' onClick={handleShow}><FontAwesomeIcon icon={faCheck} /> To Do List</Navbar.Brand>
+        <Navbar.Brand className='navbar-brand' onClick={handleShow}><FontAwesomeIcon icon={faCheck} /> To Do Journal</Navbar.Brand>
         <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end">
-          {signedIn === false ?
-            <Button className={'navbar-button'} onClick={() => login()}>
-              <FontAwesomeIcon icon={faArrowRightToBracket} /> Sign In with Google
-            </Button>
-          :
-            <Dropdown drop='down-centered'>
-              <Dropdown.Toggle className={'navbar-button'} variant="success" id="dropdown-basic">
+        <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
+            {signedIn === false ?
+              <Button className={'navbar-button'} onClick={() => login()}>
+                <FontAwesomeIcon icon={faArrowRightToBracket} /> Sign In with Google
+              </Button>
+              :
+              <Dropdown drop='down-centered' align={{ lg: 'end' }}>
+                <Dropdown.Toggle className={'navbar-button'} variant="success" id="dropdown-basic">
                   <img className='nav-bar-image' src={profile.picture} alt="user image" />
-              </Dropdown.Toggle>
+                </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={() => logOut()}>Log Out</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          }
+                <Dropdown.Menu className='nav-bar-logout' >
+                  <Dropdown.Item onClick={() => logOut()}>Log Out</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            }
         </Navbar.Collapse>
       </Container>
       <Canvas show={show} handleclose={handleClose}/>
