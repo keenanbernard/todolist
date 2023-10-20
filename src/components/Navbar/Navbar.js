@@ -31,6 +31,9 @@ const NavbarSignIn = () => {
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
+
+    if(loggedInUser == null) return
+
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       setProfile(foundUser);
